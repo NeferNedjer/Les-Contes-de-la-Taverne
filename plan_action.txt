@@ -1,0 +1,45 @@
+
+Plan d'action technique - Les Contes de la Taverne
+
+1. Initialisation
+------------------
+- Créer le dépôt GitHub et projet Symfony
+- Configurer base MySQL (utf8mb4, InnoDB)
+
+2. Authentification
+--------------------
+- make:user pour entité User (email, password, displayName, createdAt)
+- make:registration-form pour l'inscription
+- make:security:form-login pour le login/logout
+- Redirection après login vers la page d'accueil
+
+3. CRUD Story
+--------------
+- make:entity Story (titre, slug, contenu, statut, user, dates)
+- make:crud Story pour générer les pages Twig
+- Restreindre édition/suppression à l'auteur
+
+4. Système de Likes
+--------------------
+- make:entity StoryLike (story_id, user_id, createdAt)
+- Endpoint POST /story/{id}/like (toggle like/unlike)
+- Affichage compteur de likes + meilleure story du mois
+
+5. Frontend et design
+----------------------
+- Intégration TailwindCSS
+- Thème taverne/parchemin
+- Page d'accueil avec liste des stories publiées
+- Bloc "Histoire du mois"
+
+6. Tests et déploiement
+------------------------
+- Fixtures pour données de démo
+- Tests basiques (authent, CRUD)
+- Déploiement sur OVH/Scaleway
+
+7. Évolutions futures
+----------------------
+- Tags, recherche fulltext
+- Commentaires
+- Génération IA + paiement Stripe

@@ -1,0 +1,42 @@
+
+Cahier des charges - Les Contes de la Taverne
+
+1. Contexte et objectifs
+------------------------
+Créer une plateforme web où les joueurs et maîtres de jeu peuvent publier leurs récits de campagnes sous forme de mini-romans.
+Le but est de mettre en avant la meilleure histoire chaque mois grâce à un système de likes.
+
+2. Public visé
+--------------
+- Joueurs et MJ de jeux de rôle (D&D, Pathfinder, Warhammer...)
+- Communauté francophone JdR
+- Lecteurs amateurs d'histoires fantasy
+
+3. Fonctionnalités MVP
+-----------------------
+- Inscription / Connexion utilisateur (Symfony Security)
+- CRUD Story : création, édition (auteur seulement), suppression, lecture publique
+- Système de Likes : 1 like par utilisateur et par story
+- Meilleure story du mois : mise en avant automatique
+- Page d'accueil avec liste des stories publiées
+- Design style "taverne / parchemin"
+
+4. Technologies
+----------------
+- Backend : Symfony 7, PHP 8.2, Doctrine ORM
+- Base de données : MySQL 8
+- Frontend : Twig, TailwindCSS (thème médiéval)
+- Hébergement : OVH ou Scaleway (Linux, Apache/Nginx)
+
+5. Règles de gestion
+---------------------
+- Un utilisateur ne peut éditer/supprimer que ses propres stories
+- Les stories doivent avoir un statut : brouillon ou publié
+- Les likes sont uniques par story et utilisateur
+
+6. Évolutions futures
+----------------------
+- Tags et recherche avancée
+- Commentaires
+- Génération de récits par IA (payant)
+- Système de notifications et profils utilisateurs
