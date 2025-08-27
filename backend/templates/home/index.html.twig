@@ -4,14 +4,21 @@
 
 {% block body %}
 <div class="card">
-    <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom: 12px;">
-        {% if app.user %}
-            <span class="muted" style="margin-right:auto;">Bonjour, {{ app.user.displayName ?? app.user.userIdentifier }}</span>
-            <a class="btn" href="{{ path('app_logout') }}">Se déconnecter</a>
-        {% else %}
-            <a class="btn" href="{{ path('app_login') }}">Se connecter</a>
-            <a class="btn" href="{{ path('app_register') }}">Créer un compte</a>
-        {% endif %}
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+        <div>
+            {% if app.user %}
+                <span class="muted">Bonjour, {{ app.user.displayName ?? app.user.userIdentifier }}</span>
+            {% endif %}
+        </div>
+        <div style="display:flex; gap:8px;">
+            <a class="btn" href="{{ path('app_story_index') }}">Liste des histoires</a>
+            {% if app.user %}
+                <a class="btn" href="{{ path('app_logout') }}">Se déconnecter</a>
+            {% else %}
+                <a class="btn" href="{{ path('app_login') }}">Se connecter</a>
+                <a class="btn" href="{{ path('app_register') }}">Créer un compte</a>
+            {% endif %}
+        </div>
     </div>
     {% if topStory %}
         <section class="card" style="margin-bottom: 16px;">
