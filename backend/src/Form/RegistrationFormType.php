@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,8 +21,8 @@ class RegistrationFormType extends AbstractType
             ->add('displayName', TextType::class, [
                 'label' => 'Pseudo',
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Merci de choisir un pseudo']),
-                    new Assert\Length([
+                    new NotBlank(['message' => 'Merci de choisir un pseudo']),
+                    new Length([
                         'max' => 120,
                         'maxMessage' => 'Le pseudo ne peut pas dépasser {{ limit }} caractères.'
                     ]),

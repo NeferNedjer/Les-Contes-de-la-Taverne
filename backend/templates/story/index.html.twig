@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Histoires{% endblock %}
+
+{% block body %}
+    <div style="max-width: 800px; margin: 0 auto; padding: 1rem;">
+    <h1>Toutes les histoires</h1>
+
+    {% if stories|length > 0 %}
+        <ul>
+            {% for story in stories %}
+                <li>
+                    <a href="{{ path('app_story_show', {'id': story.id}) }}">{{ story.title }}</a>
+                    — par {{ story.user ? story.user.displayName : 'Anonyme' }}
+                    — {{ story.createdAt ? story.createdAt|date('d/m/Y') : '' }}
+                    {% if app.user and app.user == story.user %}
+                        · <a href="{{ path('app_story_edit', {'id': story.id}) }}">Modifier</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune histoire pour l'instant.</p>
+    {% endif %}
+
+    {% if app.user %}
+        <p><a href="{{ path('app_story_new') }}">Écrire une nouvelle histoire</a></p>
+    {% endif %}
+    </div>
+{% endblock %}

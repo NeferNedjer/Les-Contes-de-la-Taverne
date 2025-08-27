@@ -1,19 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 <style>
     
 </style>
 
-<div class="example-wrapper">
-    <h1>Bienvenue à la Taverne !</h1>
+<div class="example-wrapper" style="max-width: 800px; margin: 0 auto; padding: 1rem;">
+    <h1>Histoires publiées</h1>
 
-    <p> Dans cette taverne, nous racontons des histoires de héros et d'aventures.</p>
-    <ul>
-        <li>Dans l'univers de Donjon & Dragon</li>
-        <li>Dans l'univers de Warhammer Fantasy</li>
-    </ul>
+    {% if stories is defined and stories|length > 0 %}
+        <ul>
+            {% for story in stories %}
+                <li>
+                    <a href="{{ path('app_story_show', { id: story.id }) }}">{{ story.title }}</a>
+                    — par {{ story.user ? story.user.displayName : 'Anonyme' }}
+                    — {{ story.createdAt ? story.createdAt|date('d/m/Y') : '' }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune histoire publiée pour l'instant.</p>
+    {% endif %}
 </div>
 {% endblock %}
