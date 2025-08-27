@@ -13,8 +13,10 @@ final class HomeController extends AbstractController
     public function index(StoryRepository $storyRepository): Response
     {
         $stories = $storyRepository->findBy(['status' => 'published'], ['createdAt' => 'DESC']);
+        $topStory = $storyRepository->findTopStoryOfCurrentMonth();
         return $this->render('home/index.html.twig', [
             'stories' => $stories,
+            'topStory' => $topStory,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Story;
+use App\Entity\StoryLike;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,4 +41,25 @@ class StoryRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findTopStoryOfCurrentMonth(): ?Story
+    {
+        $now = new \DateTimeImmutable('now');
+        $start = $now->modify('first day of this month')->setTime(0, 0, 0);
+        $end = $now->modify('last day of this month')->setTime(23, 59, 59);
+
+        $qb = $this->createQueryBuilder('s')
+            ->leftJoin(StoryLike::class, 'l', 'WITH', 'l.story = s')
+            ->andWhere('s.status = :published')
+            ->andWhere('(l.createdAt BETWEEN :start AND :end) OR l.id IS NULL')
+            ->setParameter('published', 'published')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->groupBy('s.id')
+            ->orderBy('COUNT(l.id)', 'DESC')
+            ->addOrderBy('s.createdAt', 'DESC')
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

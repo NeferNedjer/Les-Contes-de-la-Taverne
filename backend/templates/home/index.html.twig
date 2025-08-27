@@ -8,6 +8,17 @@
 </style>
 
 <div class="example-wrapper" style="max-width: 800px; margin: 0 auto; padding: 1rem;">
+    {% if topStory %}
+        <section style="margin-bottom: 2rem; padding: 1rem; border: 1px solid #ddd; border-radius: 6px;">
+            <h2>Histoire du mois</h2>
+            <p>
+                <a href="{{ path('app_story_show', { id: topStory.id }) }}">{{ topStory.title }}</a>
+                — par {{ topStory.user ? topStory.user.displayName : 'Anonyme' }}
+                — {{ topStory.createdAt ? topStory.createdAt|date('d/m/Y') : '' }}
+                — Likes: {{ topStory.likesCount }}
+            </p>
+        </section>
+    {% endif %}
     <h1>Histoires publiées</h1>
 
     {% if stories is defined and stories|length > 0 %}
