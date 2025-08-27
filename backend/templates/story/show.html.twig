@@ -3,7 +3,7 @@
 {% block title %}{{ story.title }}{% endblock %}
 
 {% block body %}
-    <article style="max-width: 800px; margin: 0 auto; padding: 1rem;">
+    <article class="card">
         <h1>{{ story.title }}</h1>
         <p>
             Par {{ story.user ? story.user.displayName : 'Anonyme' }} ·
@@ -15,7 +15,7 @@
         </div>
     </article>
 
-    <p style="max-width: 800px; margin: 0 auto; padding: 0 1rem;">
+    <p>
         <strong>Likes:</strong> {{ story.likesCount }}
         {% if app.user %}
             <form action="{{ path('app_story_like', { id: story.id }) }}" method="post" style="display:inline">
@@ -25,7 +25,7 @@
         {% endif %}
     </p>
 
-    <p style="max-width: 800px; margin: 0 auto; padding: 0 1rem;">
+    <p>
         <a href="{{ path('app_story_index') }}">← Retour à la liste</a>
         {% if app.user and app.user == story.user %}
             · <a href="{{ path('app_story_edit', {'id': story.id}) }}">Modifier</a>

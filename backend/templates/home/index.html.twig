@@ -3,13 +3,9 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    
-</style>
-
-<div class="example-wrapper" style="max-width: 800px; margin: 0 auto; padding: 1rem;">
+<div class="card">
     {% if topStory %}
-        <section style="margin-bottom: 2rem; padding: 1rem; border: 1px solid #ddd; border-radius: 6px;">
+        <section class="card" style="margin-bottom: 16px;">
             <h2>Histoire du mois</h2>
             <p>
                 <a href="{{ path('app_story_show', { id: topStory.id }) }}">{{ topStory.title }}</a>
@@ -22,12 +18,17 @@
     <h1>Histoires publiées</h1>
 
     {% if stories is defined and stories|length > 0 %}
-        <ul>
+        <ul class="list">
             {% for story in stories %}
                 <li>
-                    <a href="{{ path('app_story_show', { id: story.id }) }}">{{ story.title }}</a>
-                    — par {{ story.user ? story.user.displayName : 'Anonyme' }}
-                    — {{ story.createdAt ? story.createdAt|date('d/m/Y') : '' }}
+                    <div>
+                        <a href="{{ path('app_story_show', { id: story.id }) }}">{{ story.title }}</a>
+                        — par {{ story.user ? story.user.displayName : 'Anonyme' }}
+                        — {{ story.createdAt ? story.createdAt|date('d/m/Y') : '' }}
+                    </div>
+                    <div class="muted">
+                        {{ (story.content|slice(0, 220)) ~ (story.content|length > 220 ? '…' : '') | e('html') | nl2br }}
+                    </div>
                 </li>
             {% endfor %}
         </ul>
