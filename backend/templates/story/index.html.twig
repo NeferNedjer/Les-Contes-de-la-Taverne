@@ -4,6 +4,11 @@
 
 {% block body %}
     <div style="max-width: 800px; margin: 0 auto; padding: 1rem;">
+    {% if app.user %}
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom: 12px;">
+            <a class="btn" href="{{ path('app_home') }}">Accueil</a>
+        </div>
+    {% endif %}
     <h1>Toutes les histoires</h1>
 
     {% if stories|length > 0 %}
