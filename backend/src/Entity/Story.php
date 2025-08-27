@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -35,6 +37,12 @@ class Story
     #[ORM\ManyToOne(inversedBy: 'stories')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    /**
+     * @var Collection<int, StoryLike>
+     */
+    #[ORM\OneToMany(targetEntity: StoryLike::class, mappedBy: 'story', orphanRemoval: true)]
+    private Collection $likes;
 
     public function getId(): ?int
     {
@@ -123,5 +131,44 @@ class Story
         $this->user = $user;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->likes = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, StoryLike>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(StoryLike $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setStory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(StoryLike $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            if ($like->getStory() === $this) {
+                $like->setStory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLikesCount(): int
+    {
+        return $this->likes->count();
     }
 }

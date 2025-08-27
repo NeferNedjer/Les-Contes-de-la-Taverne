@@ -16,6 +16,16 @@
     </article>
 
     <p style="max-width: 800px; margin: 0 auto; padding: 0 1rem;">
+        <strong>Likes:</strong> {{ story.likesCount }}
+        {% if app.user %}
+            <form action="{{ path('app_story_like', { id: story.id }) }}" method="post" style="display:inline">
+                <input type="hidden" name="_token" value="{{ csrf_token('like' ~ story.id) }}" />
+                <button type="submit">J'aime / Je n'aime plus</button>
+            </form>
+        {% endif %}
+    </p>
+
+    <p style="max-width: 800px; margin: 0 auto; padding: 0 1rem;">
         <a href="{{ path('app_story_index') }}">← Retour à la liste</a>
         {% if app.user and app.user == story.user %}
             · <a href="{{ path('app_story_edit', {'id': story.id}) }}">Modifier</a>

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Story;
 use App\Form\StoryType;
 use App\Repository\StoryRepository;
+use App\Entity\StoryLike;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,5 +100,34 @@ final class StoryController extends AbstractController
         }
 
         return $this->redirectToRoute('app_story_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/{id}/like', name: 'app_story_like', methods: ['POST'])]
+    public function like(Request $request, Story $story, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        // CSRF basic protection (optional add hidden input in form)
+        if (!$this->isCsrfTokenValid('like'.$story->getId(), $request->getPayload()->getString('_token', ''))) {
+            throw $this->createAccessDeniedException();
+        }
+
+        // Check if like exists
+        $likeRepo = $entityManager->getRepository(StoryLike::class);
+        $existing = $likeRepo->findOneBy(['story' => $story, 'user' => $user]);
+        if ($existing) {
+            // Unlike
+            $entityManager->remove($existing);
+            $entityManager->flush();
+        } else {
+            $like = new StoryLike();
+            $like->setStory($story);
+            $like->setUser($user);
+            $like->setCreatedAt(new \DateTimeImmutable());
+            $entityManager->persist($like);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_story_show', ['id' => $story->getId()]);
     }
 }
