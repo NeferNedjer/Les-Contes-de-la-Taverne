@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -38,6 +40,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    /**
+     * @var Collection<int, Story>
+     */
+    #[ORM\OneToMany(targetEntity: Story::class, mappedBy: 'user')]
+    private Collection $stories;
 
     public function getId(): ?int
     {
@@ -147,5 +155,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->stories = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, Story>
+     */
+    public function getStories(): Collection
+    {
+        return $this->stories;
+    }
+
+    public function addStory(Story $story): static
+    {
+        if (!$this->stories->contains($story)) {
+            $this->stories->add($story);
+            $story->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStory(Story $story): static
+    {
+        if ($this->stories->removeElement($story)) {
+            // set the owning side to null (unless already changed)
+            if ($story->getUser() === $this) {
+                $story->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

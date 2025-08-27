@@ -17,6 +17,16 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('displayName', TextType::class, [
+                'label' => 'Pseudo',
+                'constraints' => [
+                    new Assert\NotBlank(['message' => 'Merci de choisir un pseudo']),
+                    new Assert\Length([
+                        'max' => 120,
+                        'maxMessage' => 'Le pseudo ne peut pas dépasser {{ limit }} caractères.'
+                    ]),
+                ],
+            ])
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
