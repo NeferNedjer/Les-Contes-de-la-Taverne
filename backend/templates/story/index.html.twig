@@ -6,11 +6,12 @@
     <div style="max-width: 800px; margin: 0 auto; padding: 1rem;">
     {% if app.user %}
         <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom: 12px;">
-            <a class="btn" href="{{ path('app_home') }}">Accueil</a>
+            <a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
         </div>
     {% endif %}
+    <article class="card">
     <h1>Toutes les histoires</h1>
-
+    
     {% if stories|length > 0 %}
         <ul>
             {% for story in stories %}
@@ -27,9 +28,10 @@
     {% else %}
         <p>Aucune histoire pour l'instant.</p>
     {% endif %}
-
+    </article>
     {% if app.user %}
-        <p><a href="{{ path('app_story_new') }}">Écrire une nouvelle histoire</a></p>
+        <p><a class="btn" href="{{ path('app_story_new') }}">Écrire une nouvelle histoire</a></p>
     {% endif %}
     </div>
+    
 {% endblock %}
