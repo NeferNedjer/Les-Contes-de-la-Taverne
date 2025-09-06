@@ -11,7 +11,7 @@
     --bg-accent: #e8dfcf;
     --ink: #2a241e;
     --muted: #6b6259;
-    --brand: #7a4b2e; /* wood/brown */
+    --brand: #901f1f; /* wood/brown */
     --brand-accent: #b07a4a;
     --card: #fffaf0;
     --border: #d5c9b8;
@@ -41,8 +41,10 @@ body {
 
 .titre-logo {
     display: flex;
-    font-weight: bold
+    justify-content: center;
+    align-items: center;
 }
+
 a { 
     /* color: var(--brand);  */
     text-decoration: none;
@@ -78,6 +80,7 @@ h1, h2, h3 {
     font-weight: 700;
     margin: 0 0 8px;
     font-family: "Dancing Script", cursive;
+    font-weight: weight;
 }
 
 h1 { 

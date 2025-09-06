@@ -4,6 +4,15 @@
 
 {% block body %}
 <div class="card">
+    <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom: 12px;">
+        <a class="btn" href="{{ path('app_story_index') }}">Liste des histoires</a>
+        {% if app.user %}
+            <a class="btn" href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% else %}
+            <a class="btn" href="{{ path('app_login') }}">Se connecter</a>
+            <a class="btn" href="{{ path('app_register') }}">Créer un compte</a>
+        {% endif %}
+    </div>
     <div class="titre-logo" style="text-align: center;">
     <img class="logo" src="{{ asset('img/LogoLCDLT.png') }}" alt="Logo featuring a wooden tavern sign with Les Contes de la Taverne written in bold letters, surrounded by warm candlelight and rustic decorations, evoking a cozy and welcoming atmosphere">
     <h1>Les Contes de la Taverne</h1>
@@ -14,15 +23,7 @@
                 <span class="muted">Bonjour, {{ app.user.displayName ?? app.user.userIdentifier }}</span>
             {% endif %}
         </div>
-        <div style="display:flex; gap:8px;">
-            <a class="btn" href="{{ path('app_story_index') }}">Liste des histoires</a>
-            {% if app.user %}
-                <a class="btn" href="{{ path('app_logout') }}">Se déconnecter</a>
-            {% else %}
-                <a class="btn" href="{{ path('app_login') }}">Se connecter</a>
-                <a class="btn" href="{{ path('app_register') }}">Créer un compte</a>
-            {% endif %}
-        </div>
+        
     </div>
     {% if topStory %}
         <section class="card" style="margin-bottom: 16px;">

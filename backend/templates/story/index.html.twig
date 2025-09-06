@@ -4,12 +4,14 @@
 
 {% block body %}
     <div style="max-width: 800px; margin: 0 auto; padding: 1rem;">
-    {% if app.user %}
-        <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom: 12px;">
-            <a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
-        </div>
-    {% endif %}
+
     <article class="card">
+    <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom: 12px;">
+        <a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
+        {% if app.user %}
+        <a class="btn" href="{{ path('app_story_new') }}">Écrire une nouvelle histoire</a>
+        {% endif %}
+    </div>
     <h1>Toutes les histoires</h1>
     
     {% if stories|length > 0 %}
@@ -20,7 +22,7 @@
                     — par {{ story.user ? story.user.displayName : 'Anonyme' }}
                     — {{ story.createdAt ? story.createdAt|date('d/m/Y') : '' }}
                     {% if app.user and app.user == story.user %}
-                        · <a href="{{ path('app_story_edit', {'id': story.id}) }}">Modifier</a>
+                        <a href="{{ path('app_story_edit', {'id': story.id}) }}">Modifier</a>
                     {% endif %}
                 </li>
             {% endfor %}
@@ -29,9 +31,7 @@
         <p>Aucune histoire pour l'instant.</p>
     {% endif %}
     </article>
-    {% if app.user %}
-        <p><a class="btn" href="{{ path('app_story_new') }}">Écrire une nouvelle histoire</a></p>
-    {% endif %}
+    
     </div>
     
 {% endblock %}
