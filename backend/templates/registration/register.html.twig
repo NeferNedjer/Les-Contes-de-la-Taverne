@@ -3,6 +3,7 @@
 {% block title %}Créer un compte{% endblock %}
 
 {% block body %}
+<section class="card" style="margin-bottom: 16px;">
     <h1>Créer un compte</h1>
 
     {{ form_errors(registrationForm) }}
@@ -19,4 +20,5 @@
 
         <button type="submit" class="btn">Créer un compte</button>
     {{ form_end(registrationForm) }}
+</section>
 {% endblock %}

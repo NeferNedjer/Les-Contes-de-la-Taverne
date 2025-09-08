@@ -17,7 +17,7 @@
     {% if stories|length > 0 %}
         <ul>
             {% for story in stories %}
-                <li>
+                <li class="story-item">
                     <a href="{{ path('app_story_show', {'id': story.id}) }}">{{ story.title }}</a>
                     — par {{ story.user ? story.user.displayName : 'Anonyme' }}
                     — {{ story.createdAt ? story.createdAt|date('d/m/Y') : '' }}

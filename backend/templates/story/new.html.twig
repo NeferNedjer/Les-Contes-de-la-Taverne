@@ -3,9 +3,12 @@
 {% block title %}Nouvelle histoire{% endblock %}
 
 {% block body %}
+<section class="card" style="margin-bottom: 16px;">
     <h1>Créer une nouvelle histoire</h1>
 
     {{ include('story/_form.html.twig') }}
-
+    <p style="display:flex; justify-content:flex-end; gap:8px; margin-bottom: 12px;">
     <a class="btn" href="{{ path('app_story_index') }}">retour à la liste</a>
+    </p>
+</section>
 {% endblock %}
