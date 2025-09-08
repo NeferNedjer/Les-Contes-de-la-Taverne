@@ -43,3 +43,10 @@ Plan d'action technique - Les Contes de la Taverne
 - Tags, recherche fulltext
 - Commentaires
 - Génération IA + paiement Stripe
+
+-Mettre un système de pagination
+-Mettre la possibilité d'uploader des images
+-mettre un système de photo de profil
+-Mettre un système de mail pour récupérer ou changer le mot de passe
+-Mettre un système de messagerie interne
+-Mettre un système de commentaire(optionnel)
