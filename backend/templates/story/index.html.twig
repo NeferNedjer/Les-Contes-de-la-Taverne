@@ -4,40 +4,41 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container-narrow">
+	<div class="cardContainer">
 
-		<article class="card">
-			<div class="row-right">
-				<a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
-				{% if app.user %}
-					<a class="btn" href="{{ path('app_story_new') }}">Écrire une nouvelle histoire</a>
-				{% endif %}
-			</div>
-			<section class="img-container">
-				<img src="{{ asset('img/un_groupe_aventuriers.webp') }}" alt="Un groupe d'aventuriers">
-			</section>
-			<h1>Toutes les histoires</h1>
 
-			{% if stories|length > 0 %}
-				<ul>
-					{% for story in stories %}
-						<li>
-							<a href="{{ path('app_story_show', {'id': story.id}) }}">{{ story.title }}</a>
-							— par
-							{{ story.user ? story.user.displayName : 'Anonyme' }}
-							—
-							{{ story.createdAt ? story.createdAt|date('d/m/Y') : '' }}
-							{% if app.user and app.user == story.user %}
-								<a href="{{ path('app_story_edit', {'id': story.id}) }}">Modifier</a>
-							{% endif %}
-						</li>
-					{% endfor %}
-				</ul>
-			{% else %}
-				<p>Aucune histoire pour l'instant.</p>
+		<div class="row-right">
+			<a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
+			{% if app.user %}
+				<a class="btn" href="{{ path('app_story_new') }}">Écrire une nouvelle histoire</a>
 			{% endif %}
-		</article>
-
+		</div>
+		<section class="img-container">
+			<img src="{{ asset('img/un_groupe_aventuriers.webp') }}" alt="Un groupe d'aventuriers">
+		</section>
 	</div>
+	<article class="card">
 
-{% endblock %}
+		<h1>Toutes les histoires</h1>
+
+		{% if stories|length > 0 %}
+			<ul>
+				{% for story in stories %}
+					<li>
+						<a href="{{ path('app_story_show', {'id': story.id}) }}">{{ story.title }}</a>
+						— par
+						{{ story.user ? story.user.displayName : 'Anonyme' }}
+						—
+						{{ story.createdAt ? story.createdAt|date('d/m/Y') : '' }}
+						{% if app.user and app.user == story.user %}
+							<a href="{{ path('app_story_edit', {'id': story.id}) }}">Modifier</a>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p>Aucune histoire pour l'instant.</p>
+		{% endif %}
+	</article>
+
+</div>{% endblock %}
