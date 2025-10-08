@@ -180,3 +180,20 @@ textarea {
     padding: 10px 0 ;
     border: 1px solid #000;
 }
+
+/* Image container (16:9 responsive hero) */
+.img-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    margin-bottom: 16px;
+}
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
