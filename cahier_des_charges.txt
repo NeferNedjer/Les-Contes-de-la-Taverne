@@ -14,12 +14,15 @@ Le but est de mettre en avant la meilleure histoire chaque mois grâce à un sys
 
 3. Fonctionnalités MVP
 -----------------------
-- Inscription / Connexion utilisateur (Symfony Security)
-- CRUD Story : création, édition (auteur seulement), suppression, lecture publique
-- Système de Likes : 1 like par utilisateur et par story
-- Meilleure story du mois : mise en avant automatique
-- Page d'accueil avec liste des stories publiées
-- Design style "taverne / parchemin"
+- ✅ Inscription / Connexion utilisateur (Symfony Security)
+- ✅ CRUD Story : création, édition (auteur seulement), suppression, lecture publique
+- ✅ Système de Likes : 1 like par utilisateur et par story
+- ✅ Upload d'images pour les stories (VichUploaderBundle)
+- ✅ Design responsive avec menu burger mobile
+- ✅ Page d'accueil avec liste des stories publiées
+- ✅ Page de bienvenue expliquant le concept
+- ✅ Design style "taverne / parchemin"
+- ⏳ Meilleure story du mois : mise en avant automatique
 
 4. Technologies
 ----------------
@@ -41,17 +44,18 @@ Le but est de mettre en avant la meilleure histoire chaque mois grâce à un sys
 - Génération de récits par IA (payant)// a faire en tout dernier
 - Système de notifications et profils utilisateurs
 
-7. Upload d'images pour les stories
+7. Upload d'images pour les stories ✅ TERMINÉ
 -----------------------------------
 - Objectif: permettre aux utilisateurs d'ajouter des images à leurs histoires pour illustrer leurs récits.
 
-- Périmètre MVP:
-  - Une image par story (champ de stockage du chemin de fichier).
-  - Types autorisés: JPEG, PNG, WebP. Taille maximale: 5 Mo (configurable).
-  - Stockage des fichiers dans `public/uploads/` avec renommage sécurisé (slug + hash).
-  - Validation: vérification du type MIME réel et de l'extension, contraintes de taille.
-  - Formulaire protégé (CSRF), messages d'erreur clairs.
-  - Affichage: loading="lazy", dimensions définies pour limiter les sauts de mise en page.
+- Périmètre MVP: ✅ IMPLÉMENTÉ
+  - ✅ Une image par story (champ de stockage du chemin de fichier).
+  - ✅ Types autorisés: JPEG, PNG, WebP. Taille maximale: 5 Mo (configurable).
+  - ✅ Stockage des fichiers dans `public/uploads/stories/` avec renommage sécurisé (SmartUniqueNamer).
+  - ✅ Validation: vérification du type MIME réel et de l'extension, contraintes de taille.
+  - ✅ Formulaire protégé (CSRF), messages d'erreur clairs.
+  - ✅ Affichage: dimensions définies pour limiter les sauts de mise en page.
+  - ✅ Image par défaut (dragon_bataille.webp) si pas d'upload utilisateur.
 
 - Évolutions futures:
   - Galerie multi‑images par story via entité dédiée (ordre d'affichage, légendes).

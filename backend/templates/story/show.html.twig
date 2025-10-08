@@ -7,13 +7,18 @@
 {% block body %}
 
 
-	<div class="cardContainer">
-		<div class="row-right">
-			<a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
-			<a class="btn" href="{{ path('app_story_index') }}">Retour à la liste</a>
-		</div>
+	<div
+		class="cardContainer">
+		{# <div class="row-right">
+									<a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
+									<a class="btn" href="{{ path('app_story_index') }}">Retour à la liste</a>
+								</div> #}
 		<section class="img-container">
-			<img src="{{ asset('img/dragon_bataille.webp') }}" alt="Un dragon et des soldats un armes et armures">
+			{% if story.imagePath %}
+				<img src="{{ asset('uploads/stories/' ~ story.imagePath) }}" alt="{{ story.title }}">
+			{% else %}
+				<img src="{{ asset('img/dragon_bataille.webp') }}" alt="Image par défaut - Dragon en bataille">
+			{% endif %}
 		</section>
 
 		<article>
@@ -31,9 +36,10 @@
 			<div>
 				{{ story.content|e('html')|nl2br }}
 			</div>
-			<p class="row-right">
-				<a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
-				<a class="btn" href="{{ path('app_story_index') }}">Retour à la liste</a>
+			<p
+				class="row-right">
+				{# <a class="btn" href="{{ path('app_home') }}">Retour à l'accueil</a>
+																				<a class="btn" href="{{ path('app_story_index') }}">Retour à la liste</a> #}
 				{% if app.user and app.user == story.user %}
 					<a class="btn" href="{{ path('app_story_edit', {'id': story.id}) }}">Modifier</a>
 

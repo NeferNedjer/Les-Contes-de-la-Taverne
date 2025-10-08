@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,58 @@
 		{% endblock %}
 	</head>
 	<body>
+		<nav class="navbar">
+			<div class="navbar-inner">
+				<div class="brand">
+					<img class="logo" src="{{ asset('img/LogoLCDLT.png') }}" alt="Logo Les Contes de la Taverne">
+					<span class="brand-name">Les Contes de la Taverne</span>
+				</div>
+				<div class="nav-links">
+					<a class="btn" href="{{ path('app_home') }}">Accueil</a>
+					<a class="btn" href="{{ path('app_story_index') }}">Histoires</a>
+					<a class="btn" href="{{ path('app_welcome') }}">À propos</a>
+					{% if app.user %}
+						<a class="btn" href="{{ path('app_story_new') }}">Écrire</a>
+						<a class="btn" href="{{ path('app_logout') }}">Déconnexion</a>
+					{% else %}
+						<a class="btn" href="{{ path('app_login') }}">Connexion</a>
+						<a class="btn" href="{{ path('app_register') }}">Créer un compte</a>
+					{% endif %}
+				</div>
+				<div class="burger-menu" onclick="toggleMobileMenu()">
+					<div class="burger-line"></div>
+					<div class="burger-line"></div>
+					<div class="burger-line"></div>
+				</div>
+			</div>
+			<div class="mobile-menu">
+				<div class="nav-links">
+					<a class="btn" href="{{ path('app_home') }}">Accueil</a>
+					<a class="btn" href="{{ path('app_story_index') }}">Histoires</a>
+					<a class="btn" href="{{ path('app_welcome') }}">À propos</a>
+					{% if app.user %}
+						<a class="btn" href="{{ path('app_story_new') }}">Écrire</a>
+						<a class="btn" href="{{ path('app_logout') }}">Déconnexion</a>
+					{% else %}
+						<a class="btn" href="{{ path('app_login') }}">Connexion</a>
+						<a class="btn" href="{{ path('app_register') }}">Créer un compte</a>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
 		<div class="container"> {% block body %}{% endblock %}
 			</div>
+			<footer class="footer">
+				<div class="footer-inner">
+					<small>©
+						{{ "now"|date("Y") }}
+						Les Contes de la Taverne</small>
+					<div class="footer-links">
+						<a href="{{ path('app_welcome') }}">À propos</a>
+						<a href="#">Contact</a>
+						<a href="#">Mentions légales</a>
+					</div>
+				</div>
+			</footer>
 		</body>
 	</html>

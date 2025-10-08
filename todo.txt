@@ -1,0 +1,86 @@
+TODO - Les Contes de la Taverne
+===============================
+
+PRIORITÉ HAUTE (MVP)
+====================
+
+1. ⏳ Meilleure story du mois
+   - Logique pour identifier la story avec le plus de likes du mois
+   - Mise en avant sur la page d'accueil
+   - Badge "Story du mois" sur la story
+
+2. 🔧 Back-office EasyAdmin
+   - Installation et configuration d'EasyAdmin
+   - Dashboard pour User, Story, StoryLike
+   - Système de rôles (ROLE_ADMIN, ROLE_MODERATOR)
+   - Modération des stories (validation avant publication)
+   - Actions en masse (publier/dépublier/supprimer)
+
+3. 🔒 Sécurité et validation
+   - Validation des images uploadées (types MIME, taille)
+   - Suppression des métadonnées EXIF
+   - Protection contre l'exécution de fichiers malveillants
+
+PRIORITÉ MOYENNE
+================
+
+4. 🏷️ Système de tags
+   - Entité Tag
+   - Association Many-to-Many avec Story
+   - Interface de sélection de tags dans le formulaire
+   - Page de recherche par tags
+
+5. 🔍 Recherche avancée
+   - Recherche par titre, contenu, auteur
+   - Filtres par tags, date, statut
+   - Pagination des résultats
+
+6. 💬 Système de commentaires
+   - Entité Comment
+   - Association avec Story et User
+   - Interface de modération dans EasyAdmin
+
+PRIORITÉ BASSE (ÉVOLUTIONS)
+============================
+
+7. 📊 Tableau de bord utilisateur
+   - Profil utilisateur avec statistiques
+   - Historique des stories publiées
+   - Notifications
+
+8. 🎨 Améliorations UX/UI
+   - Glisser-déposer pour l'upload d'images
+   - Redimensionnement automatique des images
+   - Compression WebP/AVIF
+   - Galerie multi-images par story
+
+9. 🚀 Performance et optimisation
+   - Cache des requêtes fréquentes
+   - Optimisation des images (LiipImagineBundle)
+   - CDN pour les images (S3/Scaleway)
+
+10. 🤖 IA (dernière priorité)
+    - Génération de récits par IA (payant)
+    - Détection automatique de contenu inapproprié
+
+FONCTIONNALITÉS TERMINÉES ✅
+============================
+
+✅ Authentification utilisateur (inscription/connexion)
+✅ CRUD Story complet
+✅ Système de likes
+✅ Upload d'images (VichUploaderBundle)
+✅ Design responsive avec menu burger
+✅ Page de bienvenue
+✅ Design médiéval cohérent
+✅ Footer sticky
+✅ Navbar sticky avec logo
+
+PROCHAINES ÉTAPES RECOMMANDÉES
+==============================
+
+1. Commencer par EasyAdmin (modération essentielle)
+2. Puis système de tags (améliore la découvrabilité)
+3. Enfin recherche avancée (UX complète)
+
+STATUT GLOBAL: ~70% du MVP terminé
