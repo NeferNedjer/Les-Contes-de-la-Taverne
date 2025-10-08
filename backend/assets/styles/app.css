@@ -47,6 +47,39 @@ body {
     align-items: center;
 }
 
+/* Simple utilities to replace inline styles */
+.row-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.center-text { text-align: center; }
+
+.mb-16 { margin-bottom: 16px; }
+
+.between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.inline { display: inline; }
+
+.flex-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 a { 
     /* color: var(--brand);  */
     text-decoration: none;
@@ -65,13 +98,25 @@ a:hover {
     padding: 16px;
 }
 
-.card {
+.cardContainer {
     /* background: var(--card); */
     background-image: url("../img/papier.jpg");
     border: 1px solid var(--border);
     /* border-radius: 8px; */
     padding: 16px;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.04), inset 0 0 60px rgba(176,122,74,0.06);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), inset 0 0 60px rgba(176, 122, 74, 0.06);
+    font-weight: bold;
+}
+
+.card {
+    /* background: var(--card); */
+    background-image: url("../img/papier.jpg");
+    background-color: rgba(222, 212, 174, 0.486);
+    background-blend-mode: lighten;
+    border: 1px solid var(--border);
+    /* border-radius: 8px; */
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08), inset 0 0 60px rgba(176,122,74,0.06);
     font-weight: bold;
 }
 

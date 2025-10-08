@@ -26,7 +26,7 @@ Le but est de mettre en avant la meilleure histoire chaque mois grâce à un sys
 - Backend : Symfony 7, PHP 8.2, Doctrine ORM
 - Base de données : MySQL 8
 - Frontend : Twig, TailwindCSS (thème médiéval)
-- Hébergement : OVH ou Scaleway (Linux, Apache/Nginx)
+- Hébergement : Hostinger 
 
 5. Règles de gestion
 ---------------------
@@ -38,5 +38,56 @@ Le but est de mettre en avant la meilleure histoire chaque mois grâce à un sys
 ----------------------
 - Tags et recherche avancée
 - Commentaires
-- Génération de récits par IA (payant)
+- Génération de récits par IA (payant)// a faire en tout dernier
 - Système de notifications et profils utilisateurs
+
+7. Upload d'images pour les stories
+-----------------------------------
+- Objectif: permettre aux utilisateurs d'ajouter des images à leurs histoires pour illustrer leurs récits.
+
+- Périmètre MVP:
+  - Une image par story (champ de stockage du chemin de fichier).
+  - Types autorisés: JPEG, PNG, WebP. Taille maximale: 5 Mo (configurable).
+  - Stockage des fichiers dans `public/uploads/` avec renommage sécurisé (slug + hash).
+  - Validation: vérification du type MIME réel et de l'extension, contraintes de taille.
+  - Formulaire protégé (CSRF), messages d'erreur clairs.
+  - Affichage: loading="lazy", dimensions définies pour limiter les sauts de mise en page.
+
+- Évolutions futures:
+  - Galerie multi‑images par story via entité dédiée (ordre d'affichage, légendes).
+  - Redimensionnement/miniatures et compression automatique; support WebP/AVIF avec fallback.
+  - Glisser‑déposer pour l'upload (amélioration UX).
+  - Modération avant publication, quotas par utilisateur, purge des fichiers orphelins.
+  - Stockage objet/CDN (S3/Scaleway) pour la montée en charge.
+
+- Sécurité & légal:
+  - Empêcher l'exécution de fichiers uploadés; exclure les formats à risque.
+  - Contrôler le type MIME réel (et pas seulement l'extension).
+  - Option de suppression des métadonnées EXIF sensibles.
+  - Respect RGPD: information utilisateur et suppression sur demande.
+
+8. Back-office (EasyAdmin)
+--------------------------
+- Objectif: permettre aux administrateurs de gérer et de vérifier le contenu publié par les utilisateurs.
+
+- Périmètre MVP:
+  - Accès au back-office (ex: `/admin`) restreint aux rôles `ROLE_ADMIN` (et éventuellement `ROLE_MODERATOR`).
+  - CRUD administratifs pour: `User`, `Story` (et `StoryImage` si galerie), consultation des `StoryLike`.
+  - Stories: champs éditables/lisibles adaptés au rôle; auteur en lecture seule; statut (brouillon/publié), mise en avant, dates de création/publication.
+  - Filtres et tri: par statut, auteur, date, nombre de likes.
+  - Actions en masse: publier / dépublier / supprimer.
+  - Modération: possibilité de mettre une story en attente et de la valider avant publication; commentaire interne de modération.
+
+- Sécurité & conformité:
+  - Rôles: `ROLE_ADMIN`, `ROLE_MODERATOR`; règles d'accès fines par entité et par champ.
+  - Journalisation minimale des actions sensibles (publication, dépublication, suppression).
+  - Soft delete recommandé pour stories/images afin de permettre la restauration.
+
+- UX back-office:
+  - Aperçu sécurisé du contenu et vignettes pour les images.
+  - Liens rapides vers la version publique de la story.
+
+- Évolutions futures:
+  - Règles automatiques de détection de contenu inapproprié (liste de mots, signalements utilisateurs).
+  - Notifications aux auteurs lors de la validation/refus de publication.
+  - Tableau de bord: indicateurs (stories en attente, top du mois, croissance des likes).

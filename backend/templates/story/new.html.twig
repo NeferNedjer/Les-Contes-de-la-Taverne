@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle histoire{% endblock %}
+{% block title %}Nouvelle histoire
+{% endblock %}
 
 {% block body %}
-<section class="card" style="margin-bottom: 16px;">
-    <h1>Créer une nouvelle histoire</h1>
+	<section class="cardContainer mb-16">
+		<h1>Créer une nouvelle histoire</h1>
 
-    {{ include('story/_form.html.twig') }}
-    <p style="display:flex; justify-content:flex-end; gap:8px; margin-bottom: 12px;">
-    <a class="btn" href="{{ path('app_story_index') }}">retour à la liste</a>
-    </p>
-</section>
+		{{ include('story/_form.html.twig') }}
+		<p class="row-right">
+			<a class="btn" href="{{ path('app_story_index') }}">retour à la liste</a>
+		</p>
+	</section>
 {% endblock %}

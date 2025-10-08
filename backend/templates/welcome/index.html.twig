@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue
+{% endblock %}
+
+{% block body %}
+	<div class="cardContainer">
+		<div class="row-right">
+			<a class="btn" href="{{ path('app_home') }}">Accueil</a>
+			<a class="btn" href="{{ path('app_story_index') }}">Lire les histoires</a>
+			{% if app.user %}
+				<a class="btn" href="{{ path('app_logout') }}">Se déconnecter</a>
+			{% else %}
+				<a class="btn" href="{{ path('app_login') }}">Se connecter</a>
+				<a class="btn" href="{{ path('app_register') }}">Créer un compte</a>
+			{% endif %}
+		</div>
+
+		<div class="titre-logo center-text mb-16">
+			<img class="logo" src="{{ asset('img/LogoLCDLT.png') }}" alt="Logo Les Contes de la Taverne">
+			<h1>Bienvenue à la Taverne</h1>
+		</div>
+
+		<section class="card mb-16">
+			<h2>Le principe</h2>
+			<p>
+				Les joueurs et maîtres de jeu publient leurs récits de campagnes sous forme de mini-romans.
+																				            Chacun peut lire et liker ses histoires préférées. Chaque mois, l'histoire la plus likée est mise en avant.
+			</p>
+		</section>
+
+		<section class="card mb-16">
+			<h2>Comment participer ?</h2>
+			<ol>
+				<li>Créez un compte pour publier et liker.</li>
+				<li>Écrivez votre histoire depuis votre espace.</li>
+				<li>Publiez-la pour la partager avec la communauté.</li>
+			</ol>
+		</section>
+
+		<div class="flex-row">
+			{% if not app.user %}
+				<a class="btn" href="{{ path('app_register') }}">Commencer — Créer un compte</a>
+				<a class="btn" href="{{ path('app_login') }}">J'ai déjà un compte</a>
+			{% else %}
+				<a class="btn" href="{{ path('app_story_new') }}">Écrire une histoire</a>
+			{% endif %}
+			<a class="btn" href="{{ path('app_story_index') }}">Découvrir les histoires</a>
+		</div>
+	</div>
+{% endblock %}
